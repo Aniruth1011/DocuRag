@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Documents</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+  <div class="card shadow p-4">
+    <h2 class="mb-4">Upload Your PDFs</h2>
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="pdfs" class="form-label">Choose PDF files:</label>
+        <input class="form-control" type="file" id="pdfs" name="pdfs" multiple required>
+      </div>
+      <div class="mb-3">
+        <label for="indexing_method" class="form-label">Indexing Method:</label>
+        <select class="form-select" id="indexing_method" name="indexing_method">
+          <option value="flat" selected>Flat</option>
+          <option value="ivf">ivf</option>
+          <option value="hnsw">hnsw</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="Retreival Method" class="form-label">Retreival Method:</label>
+        <select class="form-select" id="retreival_method" name="retreival_method">
+          <option value="MMR" selected>MMR</option>
+          <option value="BM25">BM25</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" type="submit">Upload and Proceed to Chat</button>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>
