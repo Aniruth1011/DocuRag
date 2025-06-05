@@ -27,6 +27,8 @@ python app.py
 
 ![Sample Output](assets/sample.JPG)
 
+![Output Document for Flat Index with MMR Retreival](final_output.docx)
+
 ## Ablation
 
 The Average Retreival time taken for Flat index with MMR Retreival is : **3.35** seconds. 
