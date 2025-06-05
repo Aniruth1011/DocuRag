@@ -23,4 +23,6 @@ pip install -r requirements.txt
 python app.py
 ```
 
+## Ablation
 
+The Average Retreival time taken for Flat index with MMR Retreival is : **3.35** seconds. 
