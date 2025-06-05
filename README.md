@@ -25,7 +25,7 @@ python app.py
 
 ### Sample
 
-![Sample Output]('./assets/sample.png')
+![Sample Output]('/assets/sample.png')
 
 ## Ablation
 
