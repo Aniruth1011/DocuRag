@@ -27,7 +27,7 @@ python app.py
 
 ![Sample Output](assets/sample.JPG)
 
-![Output Document for Flat Index with MMR Retreival](final_output.docx)
+![Output Document for Flat Index with MMR Retreival](assets/final_output.pdf)
 
 ## Ablation
 
