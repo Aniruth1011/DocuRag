@@ -1,0 +1,9 @@
+Time taken to answer the question What is quantitative finance : with flat and MMR is 4.0224432945251465 seconds
+Time taken to answer the question What is the role of accounting in business: with flat and MMR is 2.874607563018799 seconds
+Time taken to answer the question What is the power of courage?: with flat and MMR is 2.6558656692504883 seconds
+Time taken to answer the question who is  NATHANIEL	PHILBRICK ? : with flat and MMR is 3.697899580001831 seconds
+Time taken to answer the question Who are you?: with flat and MMR is 2.6043660640716553 seconds
+Time taken to answer the question What is kepler's third law?: with flat and MMR is 2.676403760910034 seconds
+Time taken to answer the question What is the journal accounting for purchase of material?: with flat and MMR is 4.346467733383179 seconds
+Time taken to answer the question What is the procedure for going forward with an IPO?: with flat and MMR is 3.9134774208068848 seconds
+Time taken to answer the question What is the role of accounting in business: with flat and MMR is 3.3098387718200684 seconds

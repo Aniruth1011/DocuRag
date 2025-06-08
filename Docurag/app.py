@@ -8,7 +8,7 @@ from pymilvus import connections, Collection
 
 def clear_vector_db():
     connections.connect("default", host="localhost", port="5000")
-    collection = Collection("LangChainCollection")
+    collection = Collection("LangChainCollection-Flatbm25")
     if not collection.is_empty:
         print("Clearing the vector database...")
     else:
