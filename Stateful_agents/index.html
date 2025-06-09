@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chatbot</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
+
+  <div class="w-full max-w-2xl shadow-lg rounded-2xl bg-gray-800 flex flex-col overflow-hidden">
+    <div id="chat" class="flex-1 p-4 space-y-4 overflow-y-auto h-[500px]">
+      <!-- Chat messages will appear here -->
+    </div>
+    
+    <div class="flex items-center border-t border-gray-700 p-4 bg-gray-800">
+      <input 
+        id="user-input" 
+        type="text" 
+        placeholder="Type a message..." 
+        class="flex-1 bg-gray-700 text-white rounded-lg px-4 py-2 focus:outline-none"
+      />
+      <button 
+        onclick="handleSend()" 
+        class="ml-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-semibold"
+      >
+        Send
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const chatContainer = document.getElementById('chat');
+    const input = document.getElementById('user-input');
+
+    function appendMessage(content, sender) {
+      const msg = document.createElement('div');
+      msg.className = `p-3 rounded-lg w-fit max-w-[75%] ${
+        sender === 'user' 
+          ? 'bg-blue-600 self-end ml-auto text-white' 
+          : 'bg-gray-700 self-start text-white'
+      }`;
+      msg.textContent = content;
+      chatContainer.appendChild(msg);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    async function handleSend() {
+      const userText = input.value.trim();
+      if (!userText) return;
+
+      appendMessage(userText, 'user');
+      input.value = '';
+
+      // --- Placeholder for your backend function ---
+      // Replace the line below with your real model call
+      const response = await getBotResponse(userText);
+
+      appendMessage(response, 'bot');
+    }
+
+    // 🔧 Placeholder logic: replace with your real function
+    async function getBotResponse(message) {
+      // This is where you use your notebook logic
+      return "This is a placeholder response.";
+    }
+  </script>
+
+</body>
+</html>
