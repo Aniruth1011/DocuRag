@@ -9,6 +9,7 @@ A Flask-based web application powered by **LangGraph**, **LangChain**, and **LLM
 - [Overview](#overview)
 - [Features](#features)
 - [Architecture](#architecture)
+- [Sample Output](#Sampleoutput)
 - [Installation](#installation)
 ---
 
@@ -42,6 +43,13 @@ The application uses a graph-based workflow:
 - **WebCrawlerTool**: Fetches live web data when required.
 
 ---
+
+### Sampleoutput 
+
+A sample output of the application. 
+!(assets/demo1.png)
+!(assets/demo1.png)
+
 
 #### 🧭 Workflow Diagram
 
