@@ -47,8 +47,8 @@ The application uses a graph-based workflow:
 ### Sampleoutput 
 
 A sample output of the application. 
-!(assets/demo1.png)
-!(assets/demo1.png)
+![Demo1](assets/demo1.png)
+![Demo2](assets/demo2.png)
 
 
 #### 🧭 Workflow Diagram
