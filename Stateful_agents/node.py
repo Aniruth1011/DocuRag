@@ -65,10 +65,35 @@ def WebCrawlerTool(state:State):
 
     search_query =state["messages"][0]
 
-    print("inside tool " , search_query)
-    results = tool.invoke(search_query) 
+    #print("inside tool " , search_query)
+    search_snippets = tool.invoke(search_query) 
 
-    return results  
+    if LLM_TYPE == "GROQ":
+        llm = ChatGroq(model=LLM_MODEL ,  temperature=0.1) 
+    elif LLM_TYPE == "google":
+        llm = ChatGoogleGenerativeAI(model=LLM_MODEL , temperature=0.1)   
+
+    prompt = PromptTemplate(
+        input_variables=["search_snippets"],
+        template="""
+    You are a smart assistant tasked with reading multiple short text outputs from search results.
+
+    Each snippet contains useful information about a topic.
+
+    Your job is to write a well-detailed, informative description that brings together the main points from all the snippets.
+
+    Here are the snippets:
+    {search_snippets}
+
+    Write a clear, well-detailed description of what these results are saying:
+    """
+    )
+
+    print("Search Snippets: ", search_snippets)
+    results= llm.invoke(prompt.invoke({"search_snippets": search_snippets})) 
+
+    print("results" , results)
+    return  results
 
 def LLM(state:State):
 
@@ -78,17 +103,24 @@ def LLM(state:State):
         llm = ChatGoogleGenerativeAI(model=LLM_MODEL , temperature=0.1)   
 
     query = (
-        "Using only the knowledge you've been trained on, provide a clear, comprehensive, and well-structured answer "
-        "to the following question. Ensure that your explanation includes relevant context, key concepts, and any useful insights. "
-        "If anything is unclear or if you need more information, use the WebCrawler tool to get more information. " 
-        "Here is the question:\n\n" + state["messages"][0]
+    "You are given a question that may require either general knowledge or recent, up-to-date information.\n\n"
+    "If you can confidently answer the question using only the knowledge you've been trained on, do so.\n"
+    "However, if the question involves current events, recent developments, newly released information, or any topic likely "
+    "to have changed since your training data cutoff, you must use the WebCrawler tool to perform a live search before answering.\n\n"
+    "Do not ask whether to use the WebCrawler. Make the decision yourself based on the nature of the question.\n"
+    "If you need it, use the WebCrawler automatically. If not, answer using your internal knowledge.\n\n"
+    "**Examples:**\n"
+    "- Use trained knowledge for: 'Explain how photosynthesis works' or 'What is the theory of relativity?'\n"
+    "- Use the WebCrawler for: 'What is the latest news on Nvidia’s stock?', 'Who won the 2024 elections?', "
+    "or 'Is there a new iPhone released this month?'\n\n"
+    "Here is the question:\n\n" + state["messages"][0]
     )
 
     tools_list = [WebCrawlerTool]
     llm = llm.bind_tools(tools_list)
 
 
-    print("Query to LLM" , query)
+    #print("Query to LLM" , query)
     result = llm.invoke(query) 
 
     if isinstance(result, AIMessage) and result.tool_calls:
@@ -103,7 +135,7 @@ def LLM(state:State):
             print("State" , State(tool_args["state"]))
             tool_output = WebCrawlerTool({"state" : tool_args["state"]})
 
-            print("&&&&&&&&&&" , tool_output)
+            #print("&&&&&&&&&&" , tool_output)
             tool_result_msg = ToolMessage(
                 content=str(tool_output),
                 tool_call_id=tool_call["id"]
@@ -112,7 +144,7 @@ def LLM(state:State):
             final_response = llm.invoke([result, tool_result_msg])
             return {"messages": [final_response]}
 
-    return {"messages": [result]}
+    return {"messages": [ result]}
 
 
 def RAG(state:State):
@@ -162,7 +194,7 @@ def RAG(state:State):
 
     result = rag_chain.invoke(query) 
 
-    return {"messages": [result]}
+    return {"messages": [ result]}
 
 def Supervisor(state: State):
     from langchain.output_parsers import PydanticOutputParser
@@ -170,7 +202,7 @@ def Supervisor(state: State):
 
     question = state["messages"][-1]
 
-    print("Supervisor received question:", question)
+    #print("Supervisor received question:", question)
 
     parser = PydanticOutputParser(pydantic_object=SuperVisorOutputParser)
     
@@ -210,12 +242,12 @@ def Supervisor(state: State):
 
     chain = prompt | llm | parser
 
-    print("Running Supervisor with question:", question) 
+    #print("Running Supervisor with question:", question) 
     # print("Prompt : " ,  prompt.template)
     
     response = chain.invoke({"question": question})
 
-    print("Parsed response:", response)
+    #print("Parsed response:", response)
 
     return {"messages": [response.Topic], "topic_reasoning": response.Reasoning}
 

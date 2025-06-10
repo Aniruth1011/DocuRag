@@ -1,5 +1,6 @@
 import os 
 from dotenv import load_dotenv 
+from  parser import RecepieOutputParser 
 load_dotenv() 
 
 from graph_workflow import create_workflow 
@@ -23,7 +24,13 @@ def ask_ai(message):
 
     print("Result:", result)
 
-    result = result["messages"][-1].content if "messages" in result and result["messages"] else "No response from AI."
+    if isinstance(result["messages"][-1] , RecepieOutputParser):
+        result_inrgredients = result["messages"][-1].ingredients 
+        result_instructions = result["messages"][-1].instructions 
+        result = f"Ingredients: {result_inrgredients}\nInstructions: {result_instructions}" 
+    else:
+        
+        result = result["messages"][-1].content if "messages" in result and result["messages"] else "No response from AI."
     return result 
 
 

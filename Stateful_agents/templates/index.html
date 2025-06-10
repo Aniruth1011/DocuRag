@@ -33,17 +33,36 @@
     const chat = document.getElementById('chat');
     const input = document.getElementById('user-input');
 
+    // function appendMessage(text, role) {
+    //   const msg = document.createElement('div');
+    //   msg.className = `p-3 rounded-lg w-fit max-w-[75%] ${
+    //     role === 'user' 
+    //     ? 'bg-blue-600 ml-auto text-white' 
+    //     : 'bg-gray-700 text-white'
+    //   }`;
+    //   msg.textContent = text;
+    //   chat.appendChild(msg);
+    //   chat.scrollTop = chat.scrollHeight;
+    // }
+
     function appendMessage(text, role) {
-      const msg = document.createElement('div');
-      msg.className = `p-3 rounded-lg w-fit max-w-[75%] ${
-        role === 'user' 
+    const msg = document.createElement('div');
+    msg.className = `p-3 rounded-lg w-fit max-w-[75%] ${
+      role === 'user' 
         ? 'bg-blue-600 ml-auto text-white' 
         : 'bg-gray-700 text-white'
-      }`;
+    }`;
+
+    if (role === 'bot') {
+      msg.innerHTML = `<pre class="whitespace-pre-wrap font-mono">${text}</pre>`;
+    } else {
       msg.textContent = text;
-      chat.appendChild(msg);
-      chat.scrollTop = chat.scrollHeight;
     }
+
+    chat.appendChild(msg);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
 
     async function handleSend() {
       const text = input.value.trim();
