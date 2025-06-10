@@ -24,3 +24,4 @@ langchain_tavily
 langchain_milvus
 langchain_chroma
 flask 
+langchain_huggingface
