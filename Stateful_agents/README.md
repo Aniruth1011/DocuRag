@@ -10,8 +10,6 @@ A Flask-based web application powered by **LangGraph**, **LangChain**, and **LLM
 - [Features](#features)
 - [Architecture](#architecture)
 - [Installation](#installation)
-- [Environment Variables](#environment-variables)
-
 ---
 
 ### 📌 Overview
