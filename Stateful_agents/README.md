@@ -58,8 +58,7 @@ The application uses a graph-based workflow:
 ### ⚙️ Installation
 
 ```bash
-git clone https://github.com/your-repo/ai-recipe-assistant.git
-cd ai-recipe-assistant
-python -m venv venv
-source venv/bin/activate  # or venv\Scripts\activate on Windows
+git clone https://github.com/Aniruth1011/DocuRag 
+cd Stateful_agents 
+conda create -n agents python=3.10
 pip install -r requirements.txt
